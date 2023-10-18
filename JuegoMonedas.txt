@@ -1,0 +1,58 @@
+public void JuegoMonedas()
+{
+    Console.WriteLine("Juego de las Monedas");
+    Console.WriteLine("--------------------");
+    Console.WriteLine("Se imprimirán tus monedas por cada intento, empiezas con 20 y por cada fallo se restaran 3, pierdes si te quedas sin monedas.");
+    Console.WriteLine();
+
+    Random random = new Random();
+
+    int monedas = 20;
+    int intento = 0;
+    int aleatorio = random.Next(1, 31);
+
+    do
+    {
+        
+        Console.Write("Intenta adivinar el numero aleatorio: ");
+        intento = Convert.ToInt32(Console.ReadLine());
+
+        if(intento == aleatorio)
+        {
+            Console.WriteLine($"Has acertado, el número es {aleatorio} y tu premio es {monedas} monedas.");
+            ImprimirMonedas(monedas);
+            break;
+        }
+        if(intento != aleatorio)
+        {
+            Console.WriteLine("Ese no es el número, mala suerte chavalin. Se te restarán 3 monedas.");
+            monedas = monedas - 3;
+            if (monedas < 3)
+            {
+                Console.WriteLine("Te has quedado con menos de 3 monedas, por lo tanto pierdes.");
+                break;
+            }
+            ImprimirMonedas(monedas);
+        }
+    } while (monedas > 0);
+    Console.WriteLine("¿Quieres volver a jugar? (s/n)");
+    string respuesta = Console.ReadLine();
+    if (respuesta == "s")
+    {
+        JuegoMonedas();
+    }
+    else
+    {
+        Console.WriteLine("Pues adiós.");
+    }
+
+    void ImprimirMonedas(int monedas)
+    {
+        for (int i = 0; i < monedas; i++)
+        {
+            Console.Write("@");
+        }
+        Console.WriteLine();
+    }
+    Console.ReadLine();
+}
